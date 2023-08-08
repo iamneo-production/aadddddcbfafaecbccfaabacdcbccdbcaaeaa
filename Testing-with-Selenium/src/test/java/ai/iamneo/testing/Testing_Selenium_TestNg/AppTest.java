@@ -28,11 +28,10 @@ public class AppTest {
 
 	@Test
 	public void testcase_1() throws InterruptedException 
-{
+	{
 		driver.navigate().to("https://jqueryui.com/droppable/");
 		
-		
-		
+	
 	}
 
 	@Test
