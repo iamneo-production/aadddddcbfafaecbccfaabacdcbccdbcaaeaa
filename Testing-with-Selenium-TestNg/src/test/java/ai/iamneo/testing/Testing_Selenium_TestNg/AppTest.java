@@ -21,19 +21,28 @@ public class AppTest {
 		driver = naew RemoteWebDriver(new URL("http://localhost:4444"), chromeOptions);
 	}
 
-	@Test
-	public void TestCase_1() throws InterruptedException {
-		driver.get("https://admin.pscollege841.exam.ly/");
-		Thread.sleep(5000);  
-		String title = driver.getTitle();
-		Assert.assertEquals(title, "PS College");
-	}
+	public void testcase_1() throws InterruptedException {
+	 driver.get("http://jqueryui.com/droppable/");
+	  String title = "Droppable | jQuery UI";
+	  Assert.assertEquals(driver.getTitle(), title);
+		}
+
+
 	@Test
 	public void TestCase_2() throws InterruptedException {
-		driver.get("https://admin.pscollege841.exam.ly/");
-		Thread.sleep(5000);  
-		String title = driver.getTitle();
-		Assert.assertEquals(title, "PS College");
+		String title= "Droppable | jQuery UI";
+		 WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.titleContains(title));
+driver.switchTo().frame(0);
+        WebElement source = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("#draggable"))));
+        WebElement target = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("#droppable"))));
+
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(source, target).build().perform();
+
+        String getText = target.getText();
+        Assert.assertEquals(getText, "Dropped!");
+    }
 	}
 
 	@AfterTest
